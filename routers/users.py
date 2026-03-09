@@ -2,8 +2,8 @@ from fastapi import Depends, HTTPException, Path, APIRouter
 from typing import Annotated
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
-from models import Todos, Users
-from database import SessionLocal
+from ..models import Todos, Users
+from ..database import SessionLocal
 from starlette import status
 from .auth import get_current_user
 from passlib.context import CryptContext
@@ -47,7 +47,7 @@ async def change_password(user: user_dependency, db: db_dependency, user_verific
     db.add(user_model)
     db.commit()
 
-@router.put("/phonenumber/{phonenumber}", status_code=status.HTTP_204_NO_CONTENT)
+@router.put("/phonenumber/{phone_number}", status_code=status.HTTP_204_NO_CONTENT)
 async def change_phone_number(user: user_dependency, db: db_dependency, phone_number: str):
     if user is None:
         raise HTTPException(status_code=401, detail="User not found.")

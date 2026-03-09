@@ -1,7 +1,8 @@
-todos_app.db
 venv
 .env
 env
 .idea
 __pycache__
 __pycache__/
+testdb.db
+todos_app.db

@@ -1,11 +1,11 @@
 from datetime import timedelta, datetime, timezone
 from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 from starlette import status
-from database import SessionLocal
-from models import Users
+from ..database import SessionLocal
+from ..models import Users
 from passlib.context import CryptContext
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from jose import jwt, JWTError
@@ -26,7 +26,7 @@ class CreateUserRequest(BaseModel):
     email: str
     first_name: str
     last_name: str
-    password: str
+    password: str = Field(min_length=5, max_length=25)
     role: str
     phone_number: str
 
